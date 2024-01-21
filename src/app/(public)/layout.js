@@ -1,4 +1,6 @@
-
+import Image from "next/image";
+import { navigationItems } from "../../../public/Data/NavigationData";
+import Link from "next/link";
 
 export const metadata = {
   title: "APIXcel a web solution",
@@ -7,8 +9,17 @@ export const metadata = {
 
 export default function PublicLayout({ children }) {
   return (
-    <>
-      {children}
-    </>
+    <div className="container">
+      <ul className="dashboard_left">
+        {navigationItems.map(({ id, label, url, iconUrl }) => (
+          <li key={id}>
+            <Link href={url} className="nav_item">
+              <Image width={18} height={18} src={iconUrl} alt="" /> {label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className="dashboard_right">{children}</div>
+    </div>
   );
 }
